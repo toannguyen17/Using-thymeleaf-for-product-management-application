@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product manager</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            background: #f6f6f6;
+        }
+        table {
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07), 0 1px 10px rgba(0, 0, 0, 0.07);
+        }
+        table > thead > tr,
+        table > thead > tr > td {
+            padding: 10px;
+            background: #607D8B;
+            color: #fff;
+        }
+
+        table > thead > tr > td + td {
+            border-left: 1px solid #ccc;
+        }
+
+        table > tbody > tr,
+        table > tbody > tr > td {
+            padding: 6px 10px;
+        }
+
+        table > tbody > tr + tr {
+            border-top: 1px solid #ccc;
+        }
+
+    </style>
+</head>
+<body>
+<center>
+    <h2>Product list</h2>
+    <a href="/products/add">Add product</a>
+    <br />
+    <br />
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Tên sản phẩm</td>
+                <td>Giá</td>
+                <td>Số lượng</td>
+                <td>Mô tả</td>
+                <td>Thương hiệu</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="product: ${list}">
+            <tr>
+                <td th:text="${product.getId()}"></td>
+                <td th:text="${product.getName()}"></td>
+                <td th:text="${product.getPrice()}"></td>
+                <td th:text="${product.getTotal()}"></td>
+                <td th:text="${product.getDescription()}"></td>
+                <td th:text="${product.getProducer()}"></td>
+                <td>
+                    <a th:href="@{'/products/edit/'+${product.getId()}}">Edit</a>
+                    <a th:href="@{'/products/delete/'+${product.getId()}}">Delete</a>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</center>
+</body>
+</html>
